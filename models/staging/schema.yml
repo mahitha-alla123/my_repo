@@ -5,8 +5,16 @@ sources:
     schema: dev_dbt
     tables:
       - name: raw_customer
-      - name: raw_orders
-      - name: stg_order
-      - name: STG_ITEMS_DATA
-      - name: STG_PRODUCT_DATA
-      - name: STG_SUPPLIES_DATA
+      - name: cust
+      - name : raw_orders
+        columns:
+            - name: order_key
+              tests:
+                - unique
+                - not_null
+            - name: ORDER_STATUS
+              tests:
+                - accepted_values:
+                      values: ['F', 'P']
+      - name : CUSTOMERS
+
